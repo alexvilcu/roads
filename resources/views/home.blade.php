@@ -10,5 +10,14 @@
                 </ul>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <h3>Actions</h3>
+                <ul class="user-actions">
+                    {{-- @foreach()
+                    @endforeach --}}
+                </ul>
+            </div>
+        </div>
 </div>
 @endsection

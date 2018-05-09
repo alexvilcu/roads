@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Site;
 
+use Auth;
+
 class SiteController extends Controller
 {
 
@@ -28,7 +30,16 @@ class SiteController extends Controller
     public function store(Request $request)
     {
     	$workingSite = new Site;
-    	$workingSite->name = $request->name;
-    	$workingSite->description = $request->description;
+        $workingSite->address = $request->address;
+        $workingSite->name = $request->name;
+    	$workingSite->user_id = Auth::id();
+        $workingSite->description = $request->description;
+        $workingSite->starting_date = $request->starting_date;
+        $workingSite->lat = $request->lat;
+    	$workingSite->lng = $request->lng;
+        $workingSite->save();
+        flash('Site created')->success();
+
+        return redirect()->back();
     }
 }

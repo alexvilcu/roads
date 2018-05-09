@@ -17,12 +17,13 @@ class CreateSiteTable extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->increments('id');
             $table->string('address');
-            $table->string('description');
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
             $table->integer('user_id');
             $table->float('lat', 10, 6);
             $table->float('lng', 10, 6);
             $table->float('begins_from', 10, 6)->nullable();
-            $table->float('ends_at', 10, 6)->nullabel();
+            $table->float('ends_at', 10, 6)->nullable();
             $table->date('starting_date')->nullable();
             $table->date('ending_date')->nullable();
             $table->timestamps();
