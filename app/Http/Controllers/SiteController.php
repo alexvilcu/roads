@@ -42,4 +42,10 @@ class SiteController extends Controller
 
         return redirect()->back();
     }
+
+    public function show($id)
+    {
+        $site = Site::find($id);
+        return view('sites.single', ['site' => $site]);
+    }
 }

@@ -13,7 +13,7 @@
                 <h3>Worksites</h3>
                 <ul class="user-actions">
                     @foreach($workSites as $workSite)
-                    	<li>{{ $workSite->address }}</li>
+                    	<li><a href="{{ route('sites.show', ['site' => $workSite->id]) }}">{{ $workSite->address }}</a></li>
                     @endforeach
                 </ul>
             </div>
