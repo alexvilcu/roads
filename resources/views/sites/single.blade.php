@@ -3,37 +3,37 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-4">
-				<h3>{{ $site->address }}</h3>
+				@include('flash::message')
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-4">
+				<h3>{{ $workSite->address }}</h3>
 			</div>
 			<div class="col-lg-4">
 				<h3>Starting date</h3>
-				@if($site->starting_date !== null)
-					<p>{{ $site->starting_date }}</p>
+				@if($workSite->starting_date !== null)
+					<p>{{ $workSite->starting_date }}</p>
 				@else
 					<p>Starting date not set</p>
 				@endif
 			</div>
 			<div class="col-lg-4">
 				<h3>Ending date</h3>
-				@if($site->ending_date !== null)
-					<p>{{ $site->ending_date }}</p>
+				@if($workSite->ending_date !== null)
+					<p>{{ $workSite->ending_date }}</p>
 				@else
 					<p>Not finished yet</p>
 				@endif
 			</div>		
-		</div>
-		<div class="row">
-			<div class="col-lg-4">
-				<form action="">
-					<div class="form-control">
-						<input type="file">
-					</div>
-				</form>
-			</div>
-			<div class="col-lg-3">
-				<button class="btn btn-success">Add photo</button>
-			</div>
-		</div>
+		</div>			
+			<form class="form-inline" action="{{ route('photo.store', ['siteId' => $workSite->id ]) }}" method="post" enctype="multipart/form-data">
+				@csrf
+				<div class="form-group mb-2">
+					<input type="file" name="photo">
+				</div>
+				<button class="btn btn-success mb-2" type="submit">Add photo</button>
+			</form>
 		<div class="row">
 			<div class="col-md-4">
 				<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">

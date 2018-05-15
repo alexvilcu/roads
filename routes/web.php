@@ -15,6 +15,7 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::post('/photo/store/{siteId}', 'PhotoController@addSiteImage')->name('photo.store');
 Route::resources([
 	'users' => 'UserController',
 	'sites' => 'SiteController'

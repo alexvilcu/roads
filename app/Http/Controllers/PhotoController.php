@@ -6,21 +6,25 @@ use Illuminate\Http\Request;
 
 use Image;
 
-use Photo;
+use App\Photo;
 
 class PhotoController extends Controller
 {
-    public function addSiteImage(Request $request, $img, $siteId)
+    public function addSiteImage(Request $request, $siteId)
     {
-    	if ($request->hasFile($img)) {
-    		$requestImage = $request->file($img);
+    	if ($request->hasFile('photo')) {
+    		$requestImage = $request->file('photo');
 	    	$filename = time() . $requestImage->getClientOriginalName();
-	    	Image::make(Input::file($img))->save(public_path('/uploads/photos/'));
+	    	Image::make($requestImage)->save(public_path('/uploads/photos/' . $filename));
 	    	$photo = new Photo;
 	    	$photo->path = $filename;
 	    	$photo->site_id = $siteId;
+	    	$photo->save();
+	    	flash('Photo added')->important()->success();
+	    	return redirect()->back();
     	} else {
-    		flash('File not uploaded');
+    		flash('File not uploaded')->important();
+    		return redirect()->back();
     	}
     	
     }

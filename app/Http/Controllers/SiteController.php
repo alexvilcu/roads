@@ -45,7 +45,8 @@ class SiteController extends Controller
 
     public function show($id)
     {
-        $site = Site::find($id);
-        return view('sites.single', ['site' => $site]);
+        $workSite = Site::find($id);
+        $photos = $workSite->photos;
+        return view('sites.single', ['workSite' => $workSite, 'photos' => $photos]);
     }
 }
