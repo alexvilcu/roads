@@ -59,7 +59,8 @@ class SiteController extends Controller
     public function show($id)
     {
         $workSite = Site::find($id);
-        $activeCarouselPhoto = Photo::find(1);
+        $activeCarouselPhoto = Photo::where('site_id', $id)->first();
+        // dd($activeCarouselPhoto);
         $photos = $workSite->photos()->where('id', '!=', $activeCarouselPhoto->id)->get();
         return view('sites.single', ['workSite' => $workSite, 'photos' => $photos, 'activeCarouselPhoto' => $activeCarouselPhoto]);
     }
