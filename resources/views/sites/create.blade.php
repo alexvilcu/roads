@@ -29,6 +29,14 @@
 					<textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
 				</div>
 				<div class="form-group">
+					<label for="category">Choose category</label>
+					<select name="category" id="">
+						@foreach($categories as $category)
+							<option value="{{ $category->id }}">{{ $category->name }}</option>
+						@endforeach
+					</select>
+				</div>
+				<div class="form-group">
 					<label for="starting_date">Started at : </label>
 					<input type="date" name="starting_date" id="starting_date" class="form-control">
 				</div>

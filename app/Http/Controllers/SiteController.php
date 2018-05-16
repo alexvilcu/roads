@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Site;
 
+use App\Category;
+
+use App\Photo;
+
 use Auth;
 
 class SiteController extends Controller
@@ -24,29 +28,39 @@ class SiteController extends Controller
 
     public function create()
     {
-    	return view('sites.create');
+        $categories = Category::all();
+    	return view('sites.create', ['categories' => $categories]);
     }
 
     public function store(Request $request)
-    {
-    	$workingSite = new Site;
-        $workingSite->address = $request->address;
-        $workingSite->name = $request->name;
-    	$workingSite->user_id = Auth::id();
-        $workingSite->description = $request->description;
-        $workingSite->starting_date = $request->starting_date;
-        $workingSite->lat = $request->lat;
-    	$workingSite->lng = $request->lng;
-        $workingSite->save();
-        flash('Site created')->success();
-
+    {   
+        if (Site::where('address', $request->address)->exists()) {
+        flash('Site already exists.')->important();
         return redirect()->back();
+    } else {
+
+            $workingSite = new Site;
+            $workingSite->address = $request->address;
+            $workingSite->name = $request->name;
+            $workingSite->user_id = Auth::id();
+            $workingSite->category_id = $request->category;
+            $workingSite->description = $request->description;
+            $workingSite->starting_date = $request->starting_date;
+            $workingSite->lat = $request->lat;
+            $workingSite->lng = $request->lng;
+            $workingSite->save();
+            flash('Site created')->success();
+
+            return redirect()->back();
+        }
+    	
     }
 
     public function show($id)
     {
         $workSite = Site::find($id);
-        $photos = $workSite->photos;
-        return view('sites.single', ['workSite' => $workSite, 'photos' => $photos]);
+        $activeCarouselPhoto = Photo::find(1);
+        $photos = $workSite->photos()->where('id', '!=', $activeCarouselPhoto->id)->get();
+        return view('sites.single', ['workSite' => $workSite, 'photos' => $photos, 'activeCarouselPhoto' => $activeCarouselPhoto]);
     }
 }

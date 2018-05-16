@@ -63,6 +63,9 @@
                                     </form>
                                     </li>
                                     <li> <a href="{{ route('users.show', ['user' => Auth::id()]) }}" class="dropdown-item"><i class="fa fa-user"></i> Profile</a></li>
+                                    @if(Auth::user()->is_admin)
+                                           <li> <a href="{{ route('categories.create') }}" class="dropdown-item"><i class="fa fa-building"></i> Add catogory</a><li>
+                                    @endif
                                 </ul>
                             </li>
                         @endguest
