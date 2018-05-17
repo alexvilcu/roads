@@ -26,6 +26,11 @@
 					<p>Not finished yet</p>
 				@endif
 			</div>		
+		</div>
+		<div class="row">
+			<div class="col-sm-2">
+				
+			</div>
 		</div>			
 			<form class="form-inline" action="{{ route('photo.store', ['siteId' => $workSite->id ]) }}" method="post" enctype="multipart/form-data">
 				@csrf
@@ -34,6 +39,7 @@
 				</div>
 				<button class="btn btn-success mb-2" type="submit">Add photo</button>
 			</form>
+		@if($activeCarouselPhoto != null)
 		<div class="carousel">
 			<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
 			  <div class="carousel-inner">
@@ -56,9 +62,23 @@
 			  </a>
 			</div>
 		</div>
+		@endif
 		<div class="row">
 			<div id="map" class="map" style="width: 100%; height: 400px;"></div>
-			<script src="{{ asset('js/show-site.js') }}"></script>
+			<script>
+				var map;
+				  function initMap()  {
+                  var buc = {lat:{{ $workSite->lat }} , lng: {{ $workSite->lng }} };
+                  var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: buc
+                  });
+                  var marker = new google.maps.Marker({
+	              		position: {lat: {{ $workSite->lat }}, lng: {{ $workSite->lng }} },
+	              		map: map
+	              	});
+                  }
+			</script>
 		</div>
 	</div>
 	

@@ -23,7 +23,8 @@ class SiteController extends Controller
     public function index()
     {
     	$workingSites = Site::all();
-    	return view('sites.index', ['sites' => $workingSites]); 
+        $ongoingWorkingSites = Sites::where('ending_date', '!=', null)->get();
+    	return view('sites.index', ['sites' => $workingSites, 'ongoingWorkingSites' => $ongoingWorkingSites]); 
     }
 
     public function create()
@@ -59,9 +60,12 @@ class SiteController extends Controller
     public function show($id)
     {
         $workSite = Site::find($id);
-        $activeCarouselPhoto = Photo::where('site_id', $id)->first();
-        // dd($activeCarouselPhoto);
-        $photos = $workSite->photos()->where('id', '!=', $activeCarouselPhoto->id)->get();
-        return view('sites.single', ['workSite' => $workSite, 'photos' => $photos, 'activeCarouselPhoto' => $activeCarouselPhoto]);
+        if (Photo::where('site_id', $id)->exists()) {
+            $activeCarouselPhoto = Photo::where('site_id', $id)->first();
+            $photos = $workSite->photos()->where('id', '!=', $activeCarouselPhoto->id)->get();
+            return view('sites.single', ['workSite' => $workSite, 'photos' => $photos, 'activeCarouselPhoto' => $activeCarouselPhoto]);
+        } else {
+             return view('sites.single', ['workSite' => $workSite, 'photos' => null, 'activeCarouselPhoto'=> null]);
+        }
     }
 }

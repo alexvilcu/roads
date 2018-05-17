@@ -26,20 +26,20 @@
         <script>
         	var map;
         	var locations = {!! json_encode($workSites) !!};
-			  function initMap()  {
-              var ro = {lat:45.9432 , lng: 24.9668};
-              var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 7,
-                center: ro
-              });
-              
-              for (var i = 0; i < locations.length; i++) {
-              var marker = new google.maps.Marker({
-              		position: {lat: locations[i].lat, lng: locations[i].lng},
-              		map: map
-              	});
-              }
-          }
+  			  function initMap()  {
+                var ro = {lat:45.9432 , lng: 24.9668};
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 7,
+                  center: ro
+                });
+                
+                for (var i = 0; i < locations.length; i++) {
+                var marker = new google.maps.Marker({
+                		position: {lat: locations[i].lat, lng: locations[i].lng},
+                		map: map
+                	});
+                }
+            }
 
         </script>
 </div>
