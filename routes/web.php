@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+Route::post('/photo/store/{siteId}', 'PhotoController@addSiteImage')->name('photo.store');
+Route::get('/category/create', 'CategoryController@create')->name('categories.create');
+Route::post('/category/store', 'CategoryController@store')->name('categories.store');
 Route::resources([
 	'users' => 'UserController',
 	'sites' => 'SiteController'

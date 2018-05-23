@@ -49,10 +49,10 @@ html, body {
     margin-bottom: 30px;
 }
 
-.map {
+/*.map {
 	width: 100%;
 	height: 400px;
-}
+}*/
 .title-container {
 	margin-top: 200px;
 	text-align: center;
@@ -75,3 +75,7 @@ html, body {
 	color: #636b6f;
 }
 
+.carousel {
+    width: 289px;
+    height: 189px;
+}

@@ -35,12 +35,15 @@
             </div>
 
             <div class="map-container">
-                <div class="map" id="map"></div>
+                <div class="map" id="map" style="width: 100%; height: 400px;"></div>
             </div>
 
         </div>
             <script>
                 var map;
+                var locations = [
+                    
+                ];
                   function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
                       center: {lat: -34.397, lng: 150.644},
@@ -48,8 +51,6 @@
                     });
                   }
                 </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRffcGDeG6ClxZLOifZEock_GQeIQbeXs&callback=initMap"
-    async defer></script>
         </div>
     </body>
 </html>

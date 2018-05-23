@@ -11,8 +11,8 @@
     <title>{{ config('app.name', 'Roads') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+    
+    <script src="{{ asset('js/app.js') }}"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
@@ -63,6 +63,9 @@
                                     </form>
                                     </li>
                                     <li> <a href="{{ route('users.show', ['user' => Auth::id()]) }}" class="dropdown-item"><i class="fa fa-user"></i> Profile</a></li>
+                                    @if(Auth::user()->is_admin)
+                                           <li> <a href="{{ route('categories.create') }}" class="dropdown-item"><i class="fa fa-building"></i> Add catogory</a><li>
+                                    @endif
                                 </ul>
                             </li>
                         @endguest
@@ -75,5 +78,6 @@
             @yield('content')
         </main>
     </div>
+    
 </body>
 </html>
