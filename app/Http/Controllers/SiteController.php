@@ -57,7 +57,7 @@ class SiteController extends Controller
     	
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $workSite = Site::find($id);
         if (Photo::where('site_id', $id)->exists()) {
