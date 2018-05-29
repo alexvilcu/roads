@@ -35,7 +35,7 @@
 			<form class="form-inline" action="{{ route('photo.store', ['siteId' => $workSite->id ]) }}" method="post" enctype="multipart/form-data">
 				@csrf
 				<div class="form-group mb-2">
-					<input type="file" name="photo">
+					<input type="file" name="photo" id="file">
 				</div>
 				<button class="btn btn-success mb-2" type="submit">Add photo</button>
 			</form>

@@ -68,4 +68,11 @@ class SiteController extends Controller
              return view('sites.single', ['workSite' => $workSite, 'photos' => null, 'activeCarouselPhoto'=> null]);
         }
     }
+
+    public function edit(Site $site)
+    {
+        $categories = Category::all();
+        // dd($site->category->name);
+        return view('sites.edit', ['site' => $site, 'categories' => $categories]);
+    }
 }
